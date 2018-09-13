@@ -6,3 +6,6 @@ Just put your cookie and token taken from your favorite browser devtools in ~/.e
 cookie = ...
 token = ...
 ```
+
+Install the Python requirements like this:
+`pip install requirements.txt`
