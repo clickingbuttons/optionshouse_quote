@@ -4,4 +4,5 @@ Using your browser cookie and token this script pulls historical intraday quote 
 Just put your cookie and token taken from your favorite browser devtools in ~/.etrade/etrade.conf like this:
 ```[etrade]
 cookie = ...
-token = ...```
+token = ...
+```
