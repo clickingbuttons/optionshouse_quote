@@ -5,6 +5,7 @@ import configparser
 import time
 import json
 import pickle
+import time
 
 import numpy as np
 import plotly
@@ -18,51 +19,51 @@ default_url = "https://trading.etrade.com/jsonServices/chartsData/v3"
 config = configparser.RawConfigParser()   
 config.read(str(Path.home()) + "/.etrade/etrade.conf")
 panics = [
-	("POTN", "02/14/2018", "https://profit.ly/1Mv4uR"),
-	("CRON", "03/01/2018", "https://profit.ly/1Mv8Za"),
-	("POTN", "03/07/2018", "https://profit.ly/1Mv9xm"),
-	("ECYT", "03/12/2018", "https://profit.ly/1MvAzq"),
-	("GOPH", "03/13/2018", "https://profit.ly/1MvBHc"),
-	("CRON", "03/20/2018", "https://profit.ly/1MvDFP"),
-	("LIQT", "03/21/2018", "https://profit.ly/1MvDSD"),
-	("FUSZ", "03/28/2018", "https://profit.ly/1MvFJE"),
-	("GOPH", "04/05/2018", "https://profit.ly/1MvH39"),
-	("GOPH", "04/12/2018", "https://profit.ly/1MvIol"),
-	("CANN", "04/17/2018", "https://profit.ly/1MvK3d"),
-	("CANN", "04/18/2018", "https://profit.ly/1MvKJc"),
-	("CANN", "04/23/2018", "https://profit.ly/1MvLoC"),
-	("FUSZ", "04/24/2018", "https://profit.ly/1MvLwm"),
-	("TZOO", "04/25/2018", "https://profit.ly/1MvM5x"),
-	("FUSZ", "04/26/2018", "https://profit.ly/1MvMK4"),
-	("FUSZ", "04/27/2018", "https://profit.ly/1MvMbS"),
-	("LRGR", "04/27/2018", "https://profit.ly/1MvMcY"),
-	("ZAGG", "05/09/2018", "https://profit.ly/1MvPHh"),
-	("HEAR", "05/09/2018", "https://profit.ly/1MvPIf"),
-	("APRN", "05/09/2018", "https://profit.ly/1MvPGW"),
-	("HEAR", "05/11/2018", "https://profit.ly/1MvPpy"),
-	("SORL", "05/15/2018", "https://profit.ly/1MvQiH"),
-	("SORL", "05/15/2018", "https://profit.ly/1MvQiH"),
-	("FUSZ", "05/21/2018", "https://profit.ly/1MvT0K"),
-	("JVA", "06/07/2018", "https://profit.ly/1MvXH6"),
-	("SNES", "06/11/2018", "https://profit.ly/1MvYbV"),
-	("DEST", "06/14/2018", "https://profit.ly/1Mva50"),
-	("EGY", "06/15/2018", "https://profit.ly/1MvaHQ"),
-	("GEVO", "06/22/2018", "https://profit.ly/1Mvc8w"),
-	("RKDA", "06/27/2018", "https://profit.ly/1Mvd8S"),
-	("ABIL", "06/28/2018", "https://profit.ly/1MvdPd"),
-	("MXC", "07/02/2018", "https://profit.ly/1Mveam"),
-	("CEI", "07/13/2018", "https://profit.ly/1MvhDw"),
-	("CODA", "07/16/2018", "https://profit.ly/1Mvhda"),
-	("CRON", "07/18/2018", ""),
-	("SRAX", "07/18/2018", "https://profit.ly/1Mvhx5"),
-	("CVSI", "07/24/2018", "https://profit.ly/1MvjR5"),
+	# ("POTN", "02/14/2018", "https://profit.ly/1Mv4uR"),
+	# ("CRON", "03/01/2018", "https://profit.ly/1Mv8Za"),
+	# ("POTN", "03/07/2018", "https://profit.ly/1Mv9xm"),
+	# ("ECYT", "03/12/2018", "https://profit.ly/1MvAzq"),
+	# ("GOPH", "03/13/2018", "https://profit.ly/1MvBHc"),
+	# ("CRON", "03/20/2018", "https://profit.ly/1MvDFP"),
+	# ("LIQT", "03/21/2018", "https://profit.ly/1MvDSD"),
+	# ("FUSZ", "03/28/2018", "https://profit.ly/1MvFJE"),
+	# ("GOPH", "04/05/2018", "https://profit.ly/1MvH39"),
+	# ("GOPH", "04/12/2018", "https://profit.ly/1MvIol"),
+	# ("CANN", "04/17/2018", "https://profit.ly/1MvK3d"),
+	# ("CANN", "04/18/2018", "https://profit.ly/1MvKJc"),
+	# ("CANN", "04/23/2018", "https://profit.ly/1MvLoC"),
+	# ("FUSZ", "04/24/2018", "https://profit.ly/1MvLwm"),
+	# ("TZOO", "04/25/2018", "https://profit.ly/1MvM5x"),
+	# ("FUSZ", "04/26/2018", "https://profit.ly/1MvMK4"),
+	# ("FUSZ", "04/27/2018", "https://profit.ly/1MvMbS"),
+	# ("LRGR", "04/27/2018", "https://profit.ly/1MvMcY"),
+	# ("ZAGG", "05/09/2018", "https://profit.ly/1MvPHh"),
+	# ("HEAR", "05/09/2018", "https://profit.ly/1MvPIf"),
+	# ("APRN", "05/09/2018", "https://profit.ly/1MvPGW"),
+	# ("HEAR", "05/11/2018", "https://profit.ly/1MvPpy"),
+	# ("SORL", "05/15/2018", "https://profit.ly/1MvQiH"),
+	# ("SORL", "05/15/2018", "https://profit.ly/1MvQiH"),
+	# ("FUSZ", "05/21/2018", "https://profit.ly/1MvT0K"),
+	# ("JVA", "06/07/2018", "https://profit.ly/1MvXH6"),
+	# ("SNES", "06/11/2018", "https://profit.ly/1MvYbV"),
+	# ("DEST", "06/14/2018", "https://profit.ly/1Mva50"),
+	# ("EGY", "06/15/2018", "https://profit.ly/1MvaHQ"),
+	## ("GEVO", "06/22/2018", "https://profit.ly/1Mvc8w"),
+	## ("RKDA", "06/27/2018", "https://profit.ly/1Mvd8S"),
+	## ("ABIL", "06/28/2018", "https://profit.ly/1MvdPd"),
+	# ("MXC", "07/02/2018", "https://profit.ly/1Mveam"),
+	# ("CEI", "07/13/2018", "https://profit.ly/1MvhDw"),
+	## ("CODA", "07/16/2018", "https://profit.ly/1Mvhda"),
+	## ("CRON", "07/18/2018", ""),
+	## ("SRAX", "07/18/2018", "https://profit.ly/1Mvhx5"),
+	## ("CVSI", "07/24/2018", "https://profit.ly/1MvjR5"),
 	("LUNA", "08/03/2018", "https://profit.ly/1Mvkic"),
 	("NVTA", "08/08/2018", "https://profit.ly/1MvlQo"),
-	("STAF", "08/15/2018", "https://profit.ly/1Mvorn"),
+	# ("STAF", "08/15/2018", "https://profit.ly/1Mvorn"),
 	("CVSI", "08/21/2018", "https://profit.ly/1Mvpcj"),
 	("CVSI", "08/23/2018", "https://profit.ly/1MvqBJ"),
 	("CVSI", "08/29/2018", "https://profit.ly/1MvrsZ"),
-	("INSY", "08/31/2018", "https://profit.ly/1MvsMF"),
+	# ("INSY", "08/31/2018", "https://profit.ly/1MvsMF"),
 	("CLOW", "09/05/2018", "https://profit.ly/1Mvt2T"),
 	("CLOW", "09/06/2018", "https://profit.ly/1MvtHG"),
 	("CRON", "09/11/2018", ""),
@@ -99,12 +100,13 @@ def get_stock(symbol, from_date, to_date, freq):
 		headers=headers)
 	return json.loads(request.urlopen(req).read())
 
-def get_candles(symbol, from_date, to_date, freq=1):
+def get_candles(symbol, from_date, to_date, freq):
 	chart_data = get_stock(symbol, from_date, to_date, freq)
 	candles = chart_data["getChartDataResponse"]["results"]["candles"]
 	for c in candles:
 		c["date"] = datetime.datetime.strptime(c["Date"], "%Y-%m-%d %H:%M:%S")
 		del c["Date"]
+	print("got", len(candles), "candles")
 	return candles
 
 def is_market(time):
@@ -113,7 +115,7 @@ def is_market(time):
 	return False
 
 def is_between(time, time1, time2):
-	if time >= time1 and time < time2:
+	if time >= time1 and time <= time2:
 		return True
 	return False
 
@@ -138,14 +140,21 @@ def morning_max(candles, from_time, to_time):
 
 def morning_panic_stats(candles):
 	# print("Finding panic in first hour of market...", end="")
-	panic = morning_min(candles, datetime.time(9, 30), datetime.time(10, 30))
+	panic_end = morning_min(candles, datetime.time(9, 30), datetime.time(10, 30))
 	# print("found", panic)
 	# print("Rewinding to find when the panic started...", end="")
-	panic_start = morning_max(candles, datetime.time(9, 29), panic["date"].time())
+	panic_start = morning_max(candles, datetime.time(9, 30), panic_end["date"].time())
 	# print("found", panic_start)
-	# print("Finding rebound in first hour after panic end...", end="")
-	rebound = morning_max(candles, panic["date"].time(), (panic["date"] + datetime.timedelta(hours=1)).time())
-	# print("found", rebound)
+	# print("Finding bounce in first hour after panic end...", end="")
+	bounce = morning_max(candles, panic_end["date"].time(), (panic_end["date"] + datetime.timedelta(hours=1)).time())
+	# print("found", bounce)
+
+	premarket_candles = [c for c in candles
+		if is_between(c["date"].time(), datetime.time(0, 0), datetime.time(9, 30))]
+	panic_candles = [c for c in candles
+		if is_between(c["date"].time(), panic_start["date"].time(), panic_end["date"].time())]
+	bounce_candles = [c for c in candles
+		if is_between(c["date"].time(), panic_end["date"].time(), bounce["date"].time())]
 
 	return {
 		"Previous close": candles[0]["close"],
@@ -154,10 +163,13 @@ def morning_panic_stats(candles):
 		"Open": market_open_close(candles)[0],
 		"Panic Start": panic_start["date"].time(),
 		"Panic Start Max": panic_start["high"],
-		"Panic End": panic["date"].time(),
-		"Panic Min": panic["low"],
-		"Bounce End": rebound["date"].time(),
-		"Bounce Max": rebound["high"],
+		"Panic End": panic_end["date"].time(),
+		"Panic Min": panic_end["low"],
+		"Bounce End": bounce["date"].time(),
+		"Bounce Max": bounce["high"],
+		"Premarket volume": sum([c["volume"] for c in premarket_candles]),
+		"Panic volume": sum([c["volume"] for c in panic_candles]),
+		"Bounce volume": sum([c["volume"] for c in bounce_candles]),
 	}
 
 def make_annotation(x, y, text, down=False):
@@ -188,10 +200,12 @@ def make_annotation(x, y, text, down=False):
 	)
 
 def add_time(date_time, time):
-	# Add a time to a date...
+	# Add a time to a datetime...
 	return date_time + datetime.timedelta(hours=time.hour, minutes=time.minute)
 
 def make_annotations(stats):
+	if not stats:
+		return []
 	return [ 
 		make_annotation(
 			add_time(stats["Date"], stats["Panic Start"]),
@@ -204,7 +218,7 @@ def make_annotations(stats):
 			stats["Bounce Max"], "Bounce End $" + str(stats["Bounce Max"])),
 	]
 
-def make_plot(candles, stats):
+def make_plot(candles, title, focus_from, focus_to, stats=None):
 	trace0 = plotly.graph_objs.Candlestick(
 		name="price",
 		x=[c["date"] for c in candles],
@@ -223,12 +237,11 @@ def make_plot(candles, stats):
 		y=[c["volume"] for c in candles],
 		yaxis="y2")
 	layout = plotly.graph_objs.Layout(
-		title=stats["Symbol"],
+		title=title,
 		showlegend=False,
 		xaxis=dict(
 			title="time",
-			range=[stats["Date"] + datetime.timedelta(hours=9, minutes=30),
-				   stats["Date"] + datetime.timedelta(hours=12)],
+			range=[focus_from, focus_to],
 			type="date"
 		),
 		yaxis=dict(
@@ -307,10 +320,26 @@ def write_spreadsheet(stats):
 		creds = tools.run_flow(flow, store)
 	service = build('sheets', 'v4', http=creds.authorize(Http()))
 
+	# Get rid of unwanted columns
+	for s in stats:
+		# In case didn't upload to imgur
+		if "name" in s.keys():
+			del s["name"]
+		if "Chart" not in s.keys():
+			s["Chart"] = ""
+
 	clear_spreadsheet(service)
 	write_headers(service, stats[0].keys())
 	for i, v in enumerate(stats):
 		write_spreadsheet_row(service, i + 1, v.values())
+
+def write_chart(chart, name):
+	plotly.offline.plot(chart, filename="charts/" + name + ".html")
+	# To write_image you need to:
+	# 	$ npm install -g electron@1.8.4 orca
+	# 	$ pip install psutil
+	# 	https://plot.ly/python/static-image-export/
+	plotly.io.write_image(chart, "images/" + name + ".png")
 
 def calculate_panic_stats():
 	print("Calculating stats...")
@@ -321,19 +350,53 @@ def calculate_panic_stats():
 
 		candles = get_candles(symbol,
 			panic_date - datetime.timedelta(hours=8),
-			panic_date + datetime.timedelta(days=1))
+			panic_date + datetime.timedelta(days=1),
+			1)
 		if not candles:
 			print("no chart data")
 			continue
 		stats = make_stats(symbol, panic_date, url, candles)
 
-		fig = make_plot(candles, stats)
-		plotly.offline.plot(fig, filename="charts/" + stats["name"] + ".html")
-		# To write_image you need to:
-		# 	$ npm install -g electron@1.8.4 orca
-		# 	$ pip install psutil
-		# 	https://plot.ly/python/static-image-export/
-		plotly.io.write_image(fig, "images/" + stats["name"] + ".png")
+		intraday = make_plot(candles,
+			symbol + " on " + panic_date.strftime("%m-%d-%Y"),
+			panic_date + datetime.timedelta(hours=9, minutes=30),
+		   	panic_date + datetime.timedelta(hours=12),
+			stats)
+		write_chart(intraday, stats["name"] + "_intraday")
+		time.sleep(2)
+
+		week_before = make_plot(
+			get_candles(symbol,
+				panic_date - datetime.timedelta(days=10),
+				panic_date + datetime.timedelta(days=1),
+				15),
+			symbol + " week before " + panic_date.strftime("%m-%d-%Y"),
+			panic_date - datetime.timedelta(days=10),
+		   	panic_date)
+		write_chart(week_before, stats["name"] + "_week")
+		time.sleep(2)
+
+		month_before  = make_plot(
+			get_candles(symbol,
+				panic_date - datetime.timedelta(days=90),
+				panic_date + datetime.timedelta(days=1),
+				60 * 24),
+			symbol + " month before " + panic_date.strftime("%m-%d-%Y"),
+			panic_date - datetime.timedelta(days=90),
+		   	panic_date)
+		write_chart(month_before, stats["name"] + "_month")
+		time.sleep(2)
+
+		year_before  = make_plot(
+			get_candles(symbol,
+				panic_date - datetime.timedelta(days=365),
+				panic_date + datetime.timedelta(days=1),
+				60 * 24),
+			symbol + " year before " + panic_date.strftime("%m-%d-%Y"),
+			panic_date - datetime.timedelta(days=365),
+		   	panic_date)
+		write_chart(year_before, stats["name"] + "_year")
+		time.sleep(2)
 
 		all_stats.append(stats)
 		print("done")
@@ -349,16 +412,17 @@ def imgur_upload(stats):
 	# 	s["Chart"] = uploaded_image.link
 	# 	del s["name"]
 	# 	print("done")
+	pass
 
 # Maybe do indexes: SPY	QQQ	RUT
 if __name__ == "__main__":
 	all_stats = calculate_panic_stats()
 	# all_stats = pickle.load(open("all_stats.pickle", "rb"))
 	print(all_stats)
-	pickle.dump(all_stats, open("all_stats.pickle", "wb"))
+	# pickle.dump(all_stats, open("all_stats.pickle", "wb"))
 
-	imgur_upload(all_stats)
-	pickle.dump(all_stats, open("all_stats.pickle", "wb"))
+	# imgur_upload(all_stats)
+	# pickle.dump(all_stats, open("all_stats.pickle", "wb"))
 
-	print("Uploading stats and charts to google sheets...")
-	write_spreadsheet(all_stats)
+	# print("Uploading stats and charts to google sheets...")
+	# write_spreadsheet(all_stats)
